@@ -1,6 +1,6 @@
 # Quick-Checkout-Plugin
 
-<b>Update 25-09-2019: Fixed validate thông tin người dùng</b>
+<b color="red">Update 25-09-2019: Fixed validate thông tin người dùng</b>
 
 Flatsome Quick Checkout Plugin – Plugin Tạo nút thanh toán nhanh cho Flatsome
 
