@@ -1,6 +1,8 @@
 jQuery.noConflict();
 //Khai báo biến Global
 stringLoading = "<div class='lds-ellipsis'> <div></div><div></div><div></div><div></div> </div>";
+patternMobile = /(05[5|8|9]|08[1|2|3|4|5|86|9]|03[2|3|4|5|6|7|8|9]|07[0|9|7|6|8]|09[0|2|1|4|3|6|7|8|9]|01[2|9])+([0-9]{7,8})\b/g;
+patternEmail = /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/gm;
 jQuery(document).ready(function($) {
     let status = 0; //Trạng thai gọi ajax 0: Chưa gọi - 1 Đang gọi
     $(".td_check_out_now").click(function() {
@@ -62,7 +64,32 @@ jQuery(document).ready(function($) {
 //Xử lý thanh toán
 function flatsome_checkout($) {
     status_checkout = 0; //Trạng thai gọi ajax 0: Chưa gọi - 1 Đang gọi
+    toastr.options.preventDuplicates = true;
     $(".btn-checkout-now").click(function() {
+        if ($(".buyername").val() == "") {
+            $(".buyername").css("border-color", "red");
+            toastr.error('Họ và tên không được phép để trống.', 'Trường thông tin không đầy đủ!')
+            return;
+        } else {
+            $(".buyername").css("border-color", "#ddd");
+        }
+        if (!patternMobile.test($(".buyernumber").val())) {
+            console.log($(".buyernumber").val());
+            $(".buyernumber").css("border-color", "red");
+            toastr.error('Số điện thoại không đúng.', 'Số điện thoại không đúng định dạng!')
+            return;
+        } else {
+            $(".buyernumber").css("border-color", "#ddd");
+        }
+        if (!patternEmail.test($(".buyeremail").val())) {
+            console.log(patternMobile.test($(".buyernumber").val()));
+            $(".buyeremail").css("border-color", "red");
+            toastr.error('Địa chỉ email không đúng.', 'Địa chỉ Email không đúng định dạng!')
+            return;
+        } else {
+            $(".buyeremail").css("border-color", "#ddd");
+        }
+
         $(this).html(stringLoading);
         //Get data from frontend
         fs_fullname = $(".buyername").val();

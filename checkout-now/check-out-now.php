@@ -19,8 +19,14 @@ function addCssToWebsite(){
     wp_register_style('flatsome_checkout_css',PLUGINPATH."assets/css/flatsome_checkout_css.css",array(),time());
     wp_enqueue_style('flatsome_checkout_css');
 
+    wp_register_style('toastr_flatsome_checkout_css',PLUGINPATH."assets/css/toastr.min.css",array(),time());
+    wp_enqueue_style('toastr_flatsome_checkout_css');
+
     wp_register_script('flatsome_checkout_js',PLUGINPATH."assets/js/flatsome_checkout.js",array('jquery'),time());
     wp_enqueue_script('flatsome_checkout_js');
+
+    wp_register_script('toastr_flatsome_checkout_js',PLUGINPATH."assets/js/toastr.min.js",array('jquery'));
+    wp_enqueue_script('toastr_flatsome_checkout_js');
 }
 add_action('wp_enqueue_scripts','addCssToWebsite');
 
@@ -67,11 +73,11 @@ function addLightBox(){
             </div>
             <div class="form_checkout_now">
                <div class="person_form_checkout_now">Thông tin người mua</div>
-               <input type="text" class="buyername" placeholder="Họ và tên"></input>
-               <input type="text" class="buyernumber" placeholder="Số điện thoại"></input>
-               <input type="text" class="buyeremail" placeholder="Địa chỉ Email"></input>
-               <input type="text" class="buyeraddress" placeholder="Địa chỉ nhận hàng"></input>
-               <textarea class="buyernote" placeholder="Ghi chú đơn hàng"></textarea>
+               <input type="text" class="buyername" placeholder="Họ và tên(bắt buộc)"></input>
+               <input type="text" class="buyernumber" placeholder="Số điện thoại(bắt buộc)"></input>
+               <input type="text" class="buyeremail" placeholder="Địa chỉ Email(tùy chọn)"></input>
+               <input type="text" class="buyeraddress" placeholder="Địa chỉ nhận hàng(bắt buộc)"></input>
+               <textarea class="buyernote" placeholder="Ghi chú đơn hàng(tùy chọn)"></textarea>
                <div class="person_form_checkout_now">Mã giảm giá</div>
                <input type="text" class="buyercoupon" placeholder="Mã giảm giá"></input>
                <button  class="btn_buyercoupon">Áp dụng</button>
