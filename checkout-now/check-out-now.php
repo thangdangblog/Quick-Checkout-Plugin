@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Flatsome - Check out now
-Plugin URI: https://thangdangblog.com/
+Plugin URI: https://thangdangblog.com/flatsome-quick-checkout-plugin-tao-nut-thanh-toan-nhanh-cho-flatsome
 Description: Thêm thanh toán nhanh cho Flatsome
 Author: Đặng Thắng
 Author URI: https://thangdangblog.com/
