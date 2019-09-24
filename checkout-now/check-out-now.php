@@ -211,6 +211,4 @@ function existCoupon($coupon){
     }
     return false;
 }
-
 ?>
-
