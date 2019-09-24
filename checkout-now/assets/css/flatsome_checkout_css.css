@@ -1,0 +1,282 @@
+.td_check_out_now {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 15px;
+    background: #03A9F4;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #03A9F4;
+    color: white;
+}
+
+.btn-checkout-flatsome {
+    display: none;
+}
+
+.info_checkout_now {
+    width: 40%;
+    display: inline-block;
+    float: left;
+}
+
+div#lightboxcheckout {
+    min-height: 500px;
+    max-width: 1000px !important;
+    padding: 0 !important;
+}
+
+.content_checkout_now {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.title_checkout_now {
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    background: #5757fc;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 21px;
+}
+
+.image_checkout_now {
+    overflow: hidden;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.image_checkout_now img {
+    object-fit: cover;
+    object-position: center center;
+    width: 250px;
+    height: 250px;
+}
+
+.form_checkout_now {
+    float: left;
+}
+
+.title_checkout_now_2 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.regular_price_flatsome {
+    color: red;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.price_checkout_now {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.number_checkout_now {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.number_checkout_now input {
+    width: 30% !important;
+    margin: 0;
+}
+
+.number_checkout_now {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.person_form_checkout_now {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.form_checkout_now {
+    width: 60%;
+}
+
+input.buyername {
+    width: 49% !important;
+    display: inline-block;
+}
+
+input.buyernumber {
+    width: 49% !important;
+    float: right;
+}
+
+div#lightboxcheckout input,
+div#lightboxcheckout textarea {
+    font-size: 15px;
+}
+
+button.btn_buyercoupon {
+    background: #1f1fc0;
+    color: white;
+    margin: 0;
+    width: 28%;
+    float: right;
+    display: block;
+    font-size: 15px;
+}
+
+input.buyercoupon {
+    width: 70% !important;
+}
+
+button.btn_buyercoupon:hover {
+    background: white;
+    border-color: #1f1fc0;
+    color: #1f1fc0;
+}
+
+.buyer_total_element {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button.btn-checkout-now {
+    display: block;
+    margin: 0 auto;
+    background: #d26e4b;
+    color: white;
+    max-height: 40px;
+    height: 40px;
+    min-width: 200px;
+    margin-top: 11px;
+}
+
+button.btn-checkout-now:hover {
+    background: #a25439;
+}
+
+textarea.buyernote {
+    min-height: 50px !important;
+}
+
+textarea.buyernote {
+    min-height: 50px !important;
+}
+
+span.buyer_total {
+    color: red;
+}
+
+
+/* Ellipsis */
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 100%;
+}
+
+.lds-ellipsis div {
+    position: absolute;
+    top: 38%;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+    left: 45px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+
+.btn_buyercoupon .lds-ellipsis div {
+    top: -10px;
+}
+
+.btn-checkout-flatsome {
+    display: none !important;
+}
+
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(19px, 0);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    input.buyercoupon {
+        width: 57% !important;
+    }
+    button.btn_buyercoupon {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .info_checkout_now {
+        width: 100%;
+        float: unset;
+    }
+    .form_checkout_now {
+        float: unset;
+        width: 100%;
+    }
+    .content_checkout_now {
+        padding-bottom: 40px;
+    }
+}
+
+@media only screen and (max-width: 411px) {
+    input.buyercoupon {
+        width: 47% !important;
+    }
+    button.btn_buyercoupon {
+        width: 50%;
+    }
+}
