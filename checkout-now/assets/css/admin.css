@@ -1,0 +1,8 @@
+.input-block {
+    margin-bottom: 30px;
+}
+
+.input-block .option-name-label {
+    display: inline-block;
+    min-width: 300px;
+}

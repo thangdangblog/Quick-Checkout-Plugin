@@ -6,10 +6,10 @@ Description: Thêm thanh toán nhanh cho Flatsome
 Author: Đặng Thắng
 Author URI: https://thangdangblog.com/
 Text Domain: flatsome-checkout-now-td
-Version: 1.0.0
+Version: 1.0.1
 */
 
-// include "admin-page.php";
+include "admin/admin-page.php";
 
 define('PLUGINPATH',plugin_dir_url(__FILE__));
 
@@ -52,10 +52,17 @@ function addBtnCheckout(){
     <?php
     
 }
-add_action('flatsome_product_box_after','addBtnCheckout');
-add_action('woocommerce_single_product_summary','addBtnCheckout',40);
 
+function getOptionDisplay(){
+    if(get_option('isshowhome_qcfl','true') == "true"){
+        add_action('flatsome_product_box_after','addBtnCheckout');
+    }
+    if(get_option('isProductPage_qcfl','true') == "true"){
+        add_action('woocommerce_single_product_summary','addBtnCheckout',31);
+    }
+}
 
+add_action('init','getOptionDisplay');
 
 function addLightBox(){
     echo do_shortcode('[button text="Lightbox button" link="#lightboxcheckout" class="btn-checkout-flatsome"]');
