@@ -1,38 +1,39 @@
 <?php
 /*
-Plugin Name: Flatsome - Check out now
+Plugin Name: Check out now for Flatsome
 Plugin URI: https://thangdangblog.com/flatsome-quick-checkout-plugin-tao-nut-thanh-toan-nhanh-cho-flatsome
-Description: Thêm thanh toán nhanh cho Flatsome
+Description: Add quick payment method for Flatsome theme
 Author: Đặng Thắng
 Author URI: https://thangdangblog.com/
-Text Domain: flatsome-checkout-now-td
-Version: 1.0.1
+Text Domain: check-out-now-for-flatsome
+Version: 1.0.2
 */
 
 include "admin/admin-page.php";
+define('CONTD_TEXTDOMAIN','check-out-now-for-flatsome');
 
-define('PLUGINPATH',plugin_dir_url(__FILE__));
+define('CONTD_PLUGINPATH',plugin_dir_url(__FILE__));
 
 global $post;
 //add Css to website
-function addCssToWebsite(){
-    wp_register_style('flatsome_checkout_css',PLUGINPATH."assets/css/flatsome_checkout_css.css",array(),time());
+function CONTD_addCssToWebsite(){
+    wp_register_style('flatsome_checkout_css',CONTD_PLUGINPATH."assets/css/flatsome_checkout_css.css",array(),time());
     wp_enqueue_style('flatsome_checkout_css');
 
-    wp_register_style('toastr_flatsome_checkout_css',PLUGINPATH."assets/css/toastr.min.css",array(),time());
+    wp_register_style('toastr_flatsome_checkout_css',CONTD_PLUGINPATH."assets/css/toastr.min.css",array(),time());
     wp_enqueue_style('toastr_flatsome_checkout_css');
 
-    wp_register_script('flatsome_checkout_js',PLUGINPATH."assets/js/flatsome_checkout.js",array('jquery'),time());
+    wp_register_script('flatsome_checkout_js',CONTD_PLUGINPATH."assets/js/flatsome_checkout.js",array('jquery'),time());
     wp_enqueue_script('flatsome_checkout_js');
 
-    wp_register_script('toastr_flatsome_checkout_js',PLUGINPATH."assets/js/toastr.min.js",array('jquery'));
+    wp_register_script('toastr_flatsome_checkout_js',CONTD_PLUGINPATH."assets/js/toastr.min.js",array('jquery'));
     wp_enqueue_script('toastr_flatsome_checkout_js');
 }
-add_action('wp_enqueue_scripts','addCssToWebsite');
+add_action('wp_enqueue_scripts','CONTD_addCssToWebsite');
 
 //add js to website
-function addJsToWebsite(){
-    wp_register_script('flatsome_checkout_js',PLUGINPATH."assets/js/flatsome_checkout.js",array('jquery'),time());
+function CONTD_addJsToWebsite(){
+    wp_register_script('flatsome_checkout_js',CONTD_PLUGINPATH."assets/js/flatsome_checkout.js",array('jquery'),time());
     wp_enqueue_script('flatsome_checkout_js');
 
     //Call Ajax in Wordpress for checkoutnow
@@ -40,31 +41,31 @@ function addJsToWebsite(){
         'ajax_url' => admin_url( 'admin-ajax.php' )
     ));
 }
-add_action('wp_enqueue_scripts','addJsToWebsite');
+add_action('wp_enqueue_scripts','CONTD_addJsToWebsite');
 
 //add button to product
-function addBtnCheckout(){
+function CONTD_addBtnCheckout(){
     global $post;
     $id_product = $post->ID;
     ?>
     
-    <div class='td_check_out_now' data-product='<?php echo $id_product ?>'>Đặt hàng nhanh</div>
+    <div class='td_check_out_now' data-product='<?php echo $id_product ?>'><?php echo __('Đặt hàng nhanh',CONTD_TEXTDOMAIN) ?></div>
     <?php
     
 }
 
-function getOptionDisplay(){
+function CONTD_getOptionDisplay(){
     if(get_option('isshowhome_qcfl','true') == "true"){
-        add_action('flatsome_product_box_after','addBtnCheckout');
+        add_action('flatsome_product_box_after','CONTD_addBtnCheckout');
     }
     if(get_option('isProductPage_qcfl','true') == "true"){
-        add_action('woocommerce_single_product_summary','addBtnCheckout',31);
+        add_action('woocommerce_single_product_summary','CONTD_addBtnCheckout',31);
     }
 }
 
-add_action('init','getOptionDisplay');
+add_action('init','CONTD_getOptionDisplay');
 
-function addLightBox(){
+function CONTD_addLightBox(){
     echo do_shortcode('[button text="Lightbox button" link="#lightboxcheckout" class="btn-checkout-flatsome"]');
     echo do_shortcode('[lightbox id="lightboxcheckout" width="600px" padding="20px"]
         <div class="title_checkout_now"></div>
@@ -97,10 +98,10 @@ function addLightBox(){
         </div>
     [/lightbox]');
 }
-add_action('wp_footer','addLightBox');
+add_action('wp_footer','CONTD_addLightBox');
 
 //ajax return
-function handleCheckoutNowAjax(){
+function CONTD_handleCheckoutNowAjax(){
     if(isset($_POST['id_product'])){
         $id_product =  $_POST['id_product'];
         $product = wc_get_product( $id_product );
@@ -121,31 +122,30 @@ function handleCheckoutNowAjax(){
     }
     exit();
 }
-add_action('wp_ajax_nopriv_flatsome_checkout','handleCheckoutNowAjax');
-add_action('wp_ajax_flatsome_checkout','handleCheckoutNowAjax');
+add_action('wp_ajax_nopriv_flatsome_checkout','CONTD_handleCheckoutNowAjax');
+add_action('wp_ajax_flatsome_checkout','CONTD_handleCheckoutNowAjax');
 
-function checkoutNow(){
+function CONTD_checkoutNow(){
     if(isset($_POST['data'])){
         $dataGuest = $_POST['data'];
         // if($dataGuest->fullname != "" && $dataGuest->phone != ""){
-            create_order($dataGuest);
+        CONTD_create_order($dataGuest);
             // add_action('woocommerce_checkout_process', 'create_order');
         // }
     }
-    
     die();
 }
-add_action('wp_ajax_flatsome_checkout_handle','checkoutNow');
-add_action('wp_ajax_nopriv_flatsome_checkout_handle','checkoutNow');
+add_action('wp_ajax_flatsome_checkout_handle','CONTD_checkoutNow');
+add_action('wp_ajax_nopriv_flatsome_checkout_handle','CONTD_checkoutNow');
 
 
-function create_order($dataGuest){
+function CONTD_create_order($dataGuest){
     $dataGuestObj = (object)$dataGuest;
     $detail = array(
-        'first_name' => $dataGuestObj->fullname,
-        'email'      => $dataGuestObj->email,
-        'phone'      => $dataGuestObj->phone,
-        'address_1'  => $dataGuestObj->address,
+        'first_name' => sanitize_text_field($dataGuestObj->fullname),
+        'email'      => sanitize_email($dataGuestObj->email),
+        'phone'      => sanitize_text_field($dataGuestObj->phone),
+        'address_1'  => sanitize_text_field($dataGuestObj->address),
     );
     if($order = wc_create_order()){
         $order->add_product(get_product($dataGuestObj->id_product), (int)$dataGuestObj->amount);
@@ -162,9 +162,9 @@ function create_order($dataGuest){
     
 }
 
-function checkCoupon(){
-    $yourCoupon = $_POST['fs_coupon'];
-    $id_product = $_POST['id_product'];
+function CONTD_checkCoupon(){
+    $yourCoupon = sanitize_text_field($_POST['fs_coupon']);
+    $id_product = sanitize_text_field($_POST['id_product']);
     $product = wc_get_product($id_product);
     // die(wc_get_product($id_product));
     if(!$product->is_on_sale()){
@@ -172,7 +172,7 @@ function checkCoupon(){
     }else{
         $price = $product->sale_price;
     }
-    if(existCoupon($yourCoupon)){
+    if(CONTD_existCoupon($yourCoupon)){
         $coupon = new WC_COUPON($yourCoupon);
         if($coupon->discount_type == "fixed_product" || $coupon->discount_type == "fixed_cart" ){
             if($price - $coupon->amount > 0){
@@ -203,10 +203,10 @@ function checkCoupon(){
     }
     exit();
 }
-add_action('wp_ajax_nopriv_checkcoupon','checkCoupon');
-add_action('wp_ajax_checkcoupon','checkCoupon');
+add_action('wp_ajax_nopriv_checkcoupon','CONTD_checkCoupon');
+add_action('wp_ajax_checkcoupon','CONTD_checkCoupon');
 
-function getAllCoupon(){
+function CONTD_getAllCoupon(){
     $arrCoupons = array();
     $coupons = get_posts(array(
         'post_type'        => 'shop_coupon',
@@ -218,8 +218,8 @@ function getAllCoupon(){
     return $arrCoupons;
 }
 
-function existCoupon($coupon){
-    if(in_array($coupon,getAllCoupon())){
+function CONTD_existCoupon($coupon){
+    if(in_array($coupon,CONTD_getAllCoupon())){
         return true;
     }
     return false;

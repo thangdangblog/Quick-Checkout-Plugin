@@ -1,24 +1,24 @@
 <?php
-define("ADMIN_PATH_CUSTOM",plugins_url()."/checkout-now");
-function addAdminCss(){
-    wp_register_style('adminCss',ADMIN_PATH_CUSTOM."/assets/css/admin.css");
+define("CONTD_ADMIN_PATH_CUSTOM",plugins_url()."/checkout-now");
+function CONTD_addAdminCss(){
+    wp_register_style('adminCss',CONTD_ADMIN_PATH_CUSTOM."/assets/css/admin.css");
     wp_enqueue_style('adminCss');
 }
-add_action('admin_enqueue_scripts','addAdminCss');
+add_action('admin_enqueue_scripts','CONTD_addAdminCss');
 
-function addMenuPageQFL(){
-    add_menu_page("Cài đặt Quick Checkout FlatSome","Quick Checkout FS","manage_options","quickcheckout-flatsome-setting","displaySettingQCFL","",10);
+function CONTD_addMenuPageQFL(){
+    add_menu_page("Cài đặt Quick Checkout FlatSome","Quick Checkout FS","manage_options","quickcheckout-flatsome-setting","CONTD_displaySettingQCFL","",10);
 }
-add_action("admin_menu","addMenuPageQFL");
+add_action("admin_menu","CONTD_addMenuPageQFL");
 
-function displaySettingQCFL(){
+function CONTD_displaySettingQCFL(){
     //If it doesn't have option, it's will add.
-    $update = updateOption();
+    $update = CONTD_updateOption();
     $isshowhome_qcfl = get_option('isshowhome_qcfl') == "true" ? 'checked' : '';
     $isProductPage_qcfl = get_option('isProductPage_qcfl') == "true" ? 'checked' : '';
 
     //Notice if update
-    if($update) echo admin_notice__success();
+    if($update) echo CONTD_admin_notice_success();
     ?>
     <h1>Quick Checkout Flatsome Setting</h1>
     <div class="conatiner">
@@ -38,7 +38,7 @@ function displaySettingQCFL(){
     <?php
 }
 
-function addOption(){
+function CONTD_addOption(){
     if(!get_option('isshowhome_qcfl')){
         add_option( 'isshowhome_qcfl','true', '', 'yes' );
     }
@@ -46,9 +46,9 @@ function addOption(){
         add_option( 'isProductPage_qcfl','true', '', 'yes' );
     }
 }
-add_action('init','addOption');
+add_action('init','CONTD_addOption');
 
-function updateOption(){
+function CONTD_updateOption(){
     if(isset($_POST['btn-update-qcfl'])){
         $status_ishowhome = $_POST['ishowhome-qcfl'] != NULL ? 'true' : 'false';
         $status_productPage = $_POST['isProductPage-qcfl'] != NULL ? 'true' : 'false';
@@ -59,7 +59,7 @@ function updateOption(){
     return false;
 }
 
-function admin_notice__success() {
+function CONTD_admin_notice_success() {
     ?>
     <div class="notice notice-success is-dismissible">
         <p><?php _e( 'Done!', 'flatsome-checkout-now-td' ); ?></p>
