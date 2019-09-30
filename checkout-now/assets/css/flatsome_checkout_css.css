@@ -222,6 +222,11 @@ span.buyer_total {
     display: none !important;
 }
 
+.amount_flatsome {
+    display: inline-block;
+    min-width: 49px;
+}
+
 @keyframes lds-ellipsis1 {
     0% {
         transform: scale(0);

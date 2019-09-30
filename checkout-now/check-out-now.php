@@ -49,7 +49,7 @@ function CONTD_addBtnCheckout(){
     $id_product = $post->ID;
     ?>
     
-    <div class='td_check_out_now' data-product='<?php echo $id_product ?>'><?php echo __('Đặt hàng nhanh',CONTD_TEXTDOMAIN) ?></div>
+    <div class='td_check_out_now' data-product='<?php echo $id_product ?>'><?php esc_html_e(__('Đặt hàng nhanh',CONTD_TEXTDOMAIN)) ?></div>
     <?php
     
 }
@@ -76,14 +76,18 @@ function CONTD_addLightBox(){
                 <div class="price_checkout_now">
                 </div>
                  <div class="number_checkout_now">
-                Số lượng: <input class="amount_flatsome" type="number" min="1" value="1"></input>
+                Số lượng:
+                <div style="width: 120px;" class="quantity buttons_added">
+                <input type="button" value="-" class="minus button is-form">
+		        <input type="number" class="input-text qty text amount_flatsome" step="1" min="1" max="9999" name="quantity" value="1" title="Qty" size="4" inputmode="numeric">
+		        <input type="button" value="+" class="plus button is-form">	</div>
                 </div>
             </div>
             <div class="form_checkout_now">
                <div class="person_form_checkout_now">Thông tin người mua</div>
                <input type="text" class="buyername" placeholder="Họ và tên(bắt buộc)"></input>
                <input type="text" class="buyernumber" placeholder="Số điện thoại(bắt buộc)"></input>
-               <input type="text" class="buyeremail" placeholder="Địa chỉ Email(tùy chọn)"></input>
+               <input type="text" class="buyeremail" placeholder="Địa chỉ Email(bắt buộc)"></input>
                <input type="text" class="buyeraddress" placeholder="Địa chỉ nhận hàng(bắt buộc)"></input>
                <textarea class="buyernote" placeholder="Ghi chú đơn hàng(tùy chọn)"></textarea>
                <div class="person_form_checkout_now">Mã giảm giá</div>
@@ -165,6 +169,7 @@ function CONTD_create_order($dataGuest){
 function CONTD_checkCoupon(){
     $yourCoupon = sanitize_text_field($_POST['fs_coupon']);
     $id_product = sanitize_text_field($_POST['id_product']);
+    $fs_mountcoupon = sanitize_text_field($_POST['fs_mountcoupon']);
     $product = wc_get_product($id_product);
     // die(wc_get_product($id_product));
     if(!$product->is_on_sale()){
@@ -178,7 +183,7 @@ function CONTD_checkCoupon(){
             if($price - $coupon->amount > 0){
                 echo json_encode(array(
                     "status" => 1,
-                    "price" => $price - $coupon->amount,
+                    "price" => $price*$fs_mountcoupon - $coupon->amount,
                 ));
             }else{
                 echo json_encode(array(
@@ -189,7 +194,7 @@ function CONTD_checkCoupon(){
         }else{
             echo json_encode(array(
                     "status" => 1,
-                    "price" => $price - $coupon->amount*$price/100,
+                    "price" => $price*$fs_mountcoupon - $coupon->amount*$price*$fs_mountcoupon/100,
                 ));
         }
         //percent

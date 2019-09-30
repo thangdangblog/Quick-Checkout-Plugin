@@ -130,11 +130,12 @@ function flatsome_checkout($) {
 
 
 function checkCoupon($, price, woocommerce_currency) {
-    status_coupon = 0;
+    let status_coupon = 0;
     $(".btn_buyercoupon").click(function() {
         $(this).html(stringLoading);
         if (status_coupon == 0) {
             let fs_coupon = $(".buyercoupon").val();
+            let fs_mountcoupon = $(".amount_flatsome").val();
             status_coupon = 1;
             $.ajax({
                 type: "POST",
@@ -143,6 +144,7 @@ function checkCoupon($, price, woocommerce_currency) {
                     action: 'checkcoupon',
                     fs_coupon: fs_coupon,
                     id_product: id_product,
+                    fs_mountcoupon: fs_mountcoupon,
                 },
                 dataType: "",
                 success: function(result) {
